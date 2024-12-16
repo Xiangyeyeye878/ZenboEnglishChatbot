@@ -36,6 +36,7 @@ import com.robot.asus.robotactivity.RobotActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.vosk.BuildConfig;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -60,7 +61,6 @@ public class MainActivity extends RobotActivity {
 
     static String clearData = "";
     static String inputStr = "";
-
 
     static String apiKey = "AIzaSyB8izLGxCxBsbaNfRq2_9cNDLNdxyAB96I";
     static List<String> conversation = new ArrayList<>();
@@ -89,7 +89,7 @@ public class MainActivity extends RobotActivity {
             robotAPI.robot.stopSpeak();
         });
 
-
+        // 選擇誰先發話
         charSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -98,6 +98,8 @@ public class MainActivity extends RobotActivity {
                 else charSwitch.setText("User first");
             }
         });
+
+        //情境建置規則
         instruction_New_Environment = String.format(
                 " create a new,realistic conversation scenario with a specific purpose .The topic must be related to %s .The scenario could be something like visiting a restaurant, making a phone call, or attending a job interview.  \"" +
                         " Each time, the generated scenario should be different from the previous and have a distinct purpose." +
@@ -119,6 +121,8 @@ public class MainActivity extends RobotActivity {
                         " 場景: Pharmacy Visit\n目的: The customer is asking for advice about over-the-counter medication.\n" +
                         " 場景: Car Rental\n目的: The customer is renting a car and asking for information about the rental agreement and insurance options.\n"
                 , preferType);
+
+        // 評分建置規則
         String instruction_evualuate = (
                 "我會輸入一段對話。請幫我根據下方的評價方法為對話評分" +
                         "The evaluation format should look like[Fluency: score, Accuracy: score, Relevance: score, Lexical Richness: score, Tone and Politeness: score, Engagement: score]\n" +
@@ -181,36 +185,8 @@ public class MainActivity extends RobotActivity {
                         "- 互動性：加入開放式問題以提升互動性。\n" +
                         "如果無輸入,則回覆\"未開始對話\""
         );
-//        String instruction1 = String.format(
-//                "  Your name is Zenbo, you are an English conversationalist, use English letters to answer, use chinese to explain.\n" +
-//                        "  When I initiate a conversation, respond with simply and shortly like a regular person, based on the context of the conversation.\n" +
-//                        "  For example:\n" +
-//                        "  roleA: 'What can I eat at McDonald's?'\n" +
-//                        "  roleB: 'You can choose from the current popular items and add a combo meal.'\n" +
-//                        "\n" +
-//                        "  -If your response deviates from the expected context, you will reply with \"Please say it again.\"\n" +
-//                        "  Only provide answers related to the intended topic.\n" +
-//                        "  You are acting as a normal human.Please respond in English with a conversational tone.\n" +
-//                        "\n" +
-//                        "  At the end of every conversation, you will strictly evaluate the user reply based on six criteria:\n" +
-//                        "    \"Fluency, Accuracy, Relevance, Lexical Richness, Tone and Politeness, and Engagement\"\n" +
-//                        "  Provide a score between 1 and 5 for each criterion, followed by a brief but rigorous explanation. Be strict and meticulous in your evaluation, ensuring a thorough assessment of each response.\n" +
-//                        "  The evaluation format should look like[Fluency: score, Accuracy: score, Relevance: score, Lexical Richness: score, Tone and Politeness: score, Engagement: score]\n" +
-//                        "\n" +
-//                        "  When the user inputs \"generate environment\", create a new,realistic conversation scenario with a specific purpose.The scenario could be something like visiting a restaurant, making a phone call, or attending a job interview.  " +
-//                        "  Each time, the generated scenario should be different from the previous and have a distinct purpose." +
-//                        "  After generating the scene show the purpose of the interaction. If \"%s\" is \"配角\", you will start chat after generating the scene." +
-//                        "  For example, after \"generate environment\", you might create a scenario like:\n" +
-//                        "    Scenario: Airport customs\n" +
-//                        "    Purpose: The traveler needs to go through customs after arriving in a new country.\n" +
-//                        "    or" +
-//                        "    Scenario:  Library Visit\n" +
-//                        "    Purpose: The customer is asking for help finding a book at the library.\n" +
-//                        "\n" +
-//                        "  When the user inputs 'Start chat', respond accordingly based on the conversation.\n" +
-//                        "  Then you will then proceed to carry on the conversation in accordance with the generated environment and its purpose.", charSwitch.getTextOn()
-//        );
 
+        // 對話規則
         String role = "";
         String instruction = String.format(
                 "  You are an English conversation Robot, use simple English to reply shortly, use traditional chinese to explain. You will play the role talk with users.\n" +
@@ -268,10 +244,12 @@ public class MainActivity extends RobotActivity {
                         "  Then you will then proceed to carry on the conversation in accordance with the generated environment and its purpose.", role, charSwitch.getText()
         );
 
+        //三個Model的初始化
         history_evu.add(instruction_evualuate);
         history_env.add(instruction_New_Environment);
         history.add(instruction);
 
+        // 獲得使用者輸入的文字
         getPrefer.setOnEditorActionListener((v, actionId, event) -> {
             // 檢查是否按下「Enter」或「完成」
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -310,6 +288,7 @@ public class MainActivity extends RobotActivity {
             return false; // 返回 false 表示事件未處理
         });
 
+        // 環境建立按鈕
         btnNew.setOnClickListener(v -> {
             robotAPI.robot.stopSpeak();
             tvResult.setText("等待場景建立中...");
@@ -317,11 +296,13 @@ public class MainActivity extends RobotActivity {
         });
         sendMessage_ENV(Environment);
 
+        // 錄音按鈕
         btnStart.setOnClickListener(v -> {
             robotAPI.robot.stopSpeak();
             robotAPI.robot.speakAndListen("start", new SpeakConfig().timeout(20).listenLanguageId(2));  //設定語言為英文
         });
 
+        // 評分按鈕
         btnEvualuate.setOnClickListener(v -> {
             robotAPI.robot.stopSpeak();
             sendMessage_EVU(evaluate);
@@ -330,7 +311,7 @@ public class MainActivity extends RobotActivity {
 
     }
 
-
+    // 環境Model過程
     private static void sendMessage_ENV(GenerativeModelFutures model) {
         conversation.clear();
         // 將歷史訊息拼接成單一內容
@@ -356,14 +337,8 @@ public class MainActivity extends RobotActivity {
             @Override
             public void onSuccess(GenerateContentResponse result) {
                 String resultText = result.getText();
-//                int index_of_star = resultText.indexOf('*'),conut_of_star = 0;
-//                while (true) {
-//                    if(index_of_star==-1)break;
-//                    else {
-//                        conut_of_star++;
-//
-//                    }
-//                }
+
+                //處理raw data
                 int index = resultText.indexOf("**Environment:**");
                 if (index != -1) {
                     resultText = resultText.substring(0, index);  // 截取到子字串 "World" 前的位置
@@ -393,12 +368,13 @@ public class MainActivity extends RobotActivity {
 
             @Override
             public void onFailure(Throwable t) {
-//                Log.d(LOG, "get text fail: " + t.toString());
+                Log.d(LOG, "get text fail: " + t.toString());
                 t.printStackTrace();
             }
         }, executor);
     }
 
+    // 評分model過程
     private static void sendMessage_EVU(GenerativeModelFutures model) {
 
         // 將歷史訊息拼接成單一內容
@@ -432,6 +408,8 @@ public class MainActivity extends RobotActivity {
         }, executor);
     }
 
+
+    // 對話Model過程
     private static void sendMessage(String userMessageText, GenerativeModelFutures model) {
         // 將歷史訊息拼接成單一內容
         StringBuilder combinedHistory = new StringBuilder();
@@ -492,10 +470,10 @@ public class MainActivity extends RobotActivity {
                     config1.listenLanguageId(2);
                     config1.languageId(2);
                     String resultForSpeak = clearResultText.replaceAll("[()':;。，、；：「」？！]", "");
-                    resultForSpeak = resultForSpeak.replaceAll("[\\u4E00-\\u9FFF]","");
+                    resultForSpeak = resultForSpeak.replaceAll("[\\u4E00-\\u9FFF]", "");
                     Log.d(LOG, "Response Text displayed: " + resultForSpeak);
                     robotAPI.robot.speak(resultForSpeak, config1);
-//                    Log.d(LOG, "Response Text displayed: " + resultText);
+                    Log.d(LOG, "Response Text displayed: " + resultText);
 //                });
 
                     // 將模型回應加入歷史紀錄中
@@ -505,13 +483,15 @@ public class MainActivity extends RobotActivity {
 
                 @Override
                 public void onFailure(Throwable t) {
-//                Log.d(LOG, "get text fail: " + t.toString());
+                    Log.d(LOG, "get text fail: " + t.toString());
                     t.printStackTrace();
                 }
             }, executor);
         }
     }
 
+
+    // 對話Model第二方法 為了先發話
     private static void sendMessageForStart(GenerativeModelFutures model) {
         // 將歷史訊息拼接成單一內容
         StringBuilder combinedHistory = new StringBuilder();
@@ -548,7 +528,7 @@ public class MainActivity extends RobotActivity {
                 config1.listenLanguageId(2);
                 config1.languageId(2);
                 String resultForSpeak = clearResultText.replaceAll("[()':;。，、；：「」？！]", "");
-                resultForSpeak = resultForSpeak.replaceAll("[\\u4E00-\\u9FFF]","");
+                resultForSpeak = resultForSpeak.replaceAll("[\\u4E00-\\u9FFF]", "");
                 Log.d(LOG, "Response Text displayed: " + resultForSpeak);
                 robotAPI.robot.speak(resultForSpeak, config1);
 //                    Log.d(LOG, "Response Text displayed: " + resultText);
@@ -569,67 +549,18 @@ public class MainActivity extends RobotActivity {
     }
 
 
-//    private static void sendMessage(String userMessageText, GenerativeModelFutures model) {
-//
-//        //多輪對話寫法
-//        //Create previous chat rule for context
-//        Content.Builder userContentBuilder = new Content.Builder();
-//        userContentBuilder.setRole("user");
-//        userContentBuilder.addText("How much does the bag cost?");
-//        Content userContent = userContentBuilder.build();
-//
-//        Content.Builder modelContentBuilder = new Content.Builder();
-//        modelContentBuilder.setRole("model");
-//        modelContentBuilder.addText("You are an English conversation chatbot, responsible for providing scenarios for conversations, such as at customs, asking for directions, or making a payment. You will only respond in English.");
-//        Content modelContent = modelContentBuilder.build();
-//
-//        List<Content> history = Arrays.asList(userContent, modelContent);
-//        // Initialize the chat
-//        ChatFutures chat = model.startChat(history);
-//
-//        //Create a new user message
-//        Content.Builder userMessageBuilder = new Content.Builder();
-//        userMessageBuilder.setRole("user");
-//        userMessageBuilder.addText(userMessageText);
-//        Content userMessage = userMessageBuilder.build();
-//
-//
-//        //注意
-//        Executor executor = Executors.newSingleThreadExecutor();
-//
-//        ListenableFuture<GenerateContentResponse> response = chat.sendMessage(userMessage);
-//        Futures.addCallback(response, new FutureCallback<GenerateContentResponse>() {
-//            @Override
-//            public void onSuccess(GenerateContentResponse result) {
-//                String resultText = result.getText();
-//                inputStr = resultText;
-//                setRobotExpression(RobotFace.HAPPY, inputStr);
-//                mCountDownTimer.start();
-//                tvResult.setText(inputStr);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable t) {
-//                tvResult.setText("Error: AI generation failed");
-//                t.printStackTrace();
-//            }
-//        }, executor);
-//    }
-
-
     public static String extractData(String input) {
         // 正则表达式匹配模式
         String regex = "\\\\\"result\\\\\":\\s*\\[\\\\\"(.*?)\\\\\"\\]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
 
-        // 查找并返回匹配的内容
+        // 查找並返回匹配內容
         if (matcher.find()) {
-            return matcher.group(1); // 提取捕获组中的内容
+            return matcher.group(1); // 取捕獲組中內容
         }
 
-        return null; // 如果没有找到
+        return null; // 如果沒有找到
     }
 
 
@@ -717,20 +648,6 @@ public class MainActivity extends RobotActivity {
         }
     }
 
-    // 設置表情或說話或細節的函式
-    private static void setRobotExpression(RobotFace face) {
-        robotAPI.robot.setExpression(face);
-    }
-
-    private static void setRobotExpression(RobotFace face, String text) {
-        ExpressionConfig config = new ExpressionConfig();
-        config.speed(85);
-        robotAPI.robot.setExpression(face, text, config);
-    }
-
-    private static void setRobotExpression(RobotFace face, String text, ExpressionConfig config) {
-        robotAPI.robot.setExpression(face, text, config);
-    }
 
     // handle StateIntentions LanguageType
     private static JSONObject handleLanguageType(String language) {
