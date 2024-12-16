@@ -20,11 +20,13 @@ Zenbo English Chatbot 是一個專為語音互動設計的應用，結合語音�
   - Zenbo junior II SDK 用於使用Zenbo內建功能
   - Google Gemini API 用於生成式 AI 支援
 
-## 流程圖
+## 流程圖  
+以下為 Zenbo English Chatbot 的主要運行流程示意圖，展現應用程序的工作原理與互動模式：  
 [![image](https://github.com/user-attachments/assets/fd5a3c7e-7960-4569-b661-ee7afac85fec)](https://www.canva.com/design/DAGYJFNg-cU/GiFq3R9p1XqNnL4plaW7gw/view?utm_content=DAGYJFNg-cU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h46c44d481f)
 
-## 實作影片
-[![影片名稱](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNhMtpD0N9umcfH2Mj8BqGavHrHhVQHIExg&s)](https://youtu.be/PJ-nb89-_IU)
+## 實作影片  
+點擊下方影片縮圖觀看應用實作展示：  
+[![實作影片](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNhMtpD0N9umcfH2Mj8BqGavHrHhVQHIExg&s)](https://youtu.be/PJ-nb89-_IU)
 
 <br>
 
@@ -42,12 +44,13 @@ Zenbo English Chatbot 是一個專為語音互動設計的應用，結合語音�
 <br>
 <br>
 
-## 未來規劃
-- 增加更多 Zenbo 表情與動作效果  
-- 整合多語言處理能力，支援中文與日文  
-- 根據語言程度分為初、中、高級  
-- 提供離線模式，進一步降低 API 依賴
-
+- ## 未來規劃
+- **增強 Zenbo 的互動能力**  
+  提供更豐富的表情與動作組合，實現更生動的教學效果  
+- **針對學習階段的分級**  
+  根據語言水平劃分初、中、高級對話內容，讓學習過程更加貼合用戶需求  
+- **離線模式開發**  
+  減少對 API 的依賴，確保在網絡連接不穩時，仍能提供核心功能支持
 <br>
 <br>
 
