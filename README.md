@@ -2,21 +2,27 @@
 ## 專案簡介
 Zenbo English Chatbot 是一個專為語音互動設計的應用，結合語音識別與 Google AI 技術，讓用戶可以與 Zenbo 機器人進行英文對話學習。  
 此專案專注於語音識別、與機器人表達互動，實現更智慧的教學體驗。
+<br>
+<br>
 ## 功能特性
 🎙️ **語音識別**：透過內建的語音識別技術，即時轉換語音到文字  
 ⚙️ **AI 驅動的回答**：使用 Google Generative AI提供流暢、智慧的回答  
 🎭 **不重複與指定情境創建**：使的話題不會重複，且根據使用者喜好調整  
 🤖 **於 Zenbo 流暢交互**：在 Zenbo 平台上的交互，簡單地進行對話  
-  
-  
+
+<br>
+<br>
+
 ## 技術棧
 - **語言：** Java + Kotlin
 - **Android 平台：** API 26+
 - **主要框架與工具：**
   - Zenbo junior II SDK 用於使用Zenbo內建功能
   - Google Gemini API 用於生成式 AI 支援
-  
-  
+
+<br>
+<br>
+
 ## 檔案結構
   ZenboEnglishChatbot/  
 ├── app/  
@@ -27,15 +33,19 @@ Zenbo English Chatbot 是一個專為語音互動設計的應用，結合語音�
 │   └── build.gradle.kts  # 模組級 Gradle 配置  
 ├── build.gradle.kts       # 專案級 Gradle 配置  
 └── README.md             # 此文件  
-  
-  
+
+<br>
+<br>
+
 ## 未來規劃
 - 增加更多 Zenbo 表情與動作效果  
 - 整合多語言處理能力，支援中文與日文  
 - 根據語言程度分為初、中、高級  
 - 提供離線模式，進一步降低 API 依賴
-  
-  
+
+<br>
+<br>
+
 ## 聯絡方式
 如有任何問題或建議，歡迎透過以下方式聯絡我：
 
