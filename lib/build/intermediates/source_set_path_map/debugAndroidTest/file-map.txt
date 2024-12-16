@@ -1,0 +1,9 @@
+org.vosk.test.lib-jna-5.13.0-0 C:\Users\yuxia\.gradle\caches\transforms-3\89456fbef6be8d6439a3fabf48e9bfd1\transformed\jna-5.13.0\res
+org.vosk.test.lib-androidTest-1 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\generated\res\resValues\androidTest\debug
+org.vosk.test.lib-androidTest-2 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\generated\res\rs\androidTest\debug
+org.vosk.test.lib-mergeDebugAndroidTestResources-3 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+org.vosk.test.lib-mergeDebugAndroidTestResources-4 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+org.vosk.test.lib-merged_res-5 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\merged_res\debugAndroidTest
+org.vosk.test.lib-packaged_res-6 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\packaged_res\debug
+org.vosk.test.lib-androidTest-7 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\src\androidTest\res
+org.vosk.test.lib-androidTestDebug-8 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\src\androidTestDebug\res

@@ -1,0 +1,2 @@
+org.vosk.test
+string jna_library_appname

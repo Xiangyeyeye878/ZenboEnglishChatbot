@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Zenbo</string>
+    <string name="btnStart">錄音</string>
+    <string name="hello">點擊進入</string>
+    <string name="textview">TextView</string>
+    <string name="button">Button</string>
+    <string name="sendButton">傳送</string>
+    <string name="enviroment">新環境</string>
+    <string name="End">停止講話</string>
+    <string name="mainCharacter">配角</string>
+    <string name="subCharacter">主角</string>
+    <string name="Hello">Hello!</string>
+    <string name="evu"><![CDATA[語意評估&建議]]></string>
+    <string name="InputChar">輸入想要的類型(不輸入即任何情況)</string>
+    <string name="_1">1</string>
+    <string name="_0">0</string>
+    <string name="uf">User first</string>
+</resources>

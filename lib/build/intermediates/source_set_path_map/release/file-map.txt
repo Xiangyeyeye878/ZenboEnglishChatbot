@@ -1,0 +1,9 @@
+org.vosk.lib-jna-5.13.0-0 C:\Users\yuxia\.gradle\caches\transforms-3\89456fbef6be8d6439a3fabf48e9bfd1\transformed\jna-5.13.0\res
+org.vosk.lib-pngs-1 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\generated\res\pngs\release
+org.vosk.lib-resValues-2 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\generated\res\resValues\release
+org.vosk.lib-rs-3 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\generated\res\rs\release
+org.vosk.lib-mergeReleaseResources-4 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+org.vosk.lib-mergeReleaseResources-5 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+org.vosk.lib-merged_res-6 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\build\intermediates\merged_res\release
+org.vosk.lib-main-7 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\src\main\res
+org.vosk.lib-release-8 C:\Users\yuxia\AndroidStudioProjects\vosk-api-master\android\lib\src\release\res
